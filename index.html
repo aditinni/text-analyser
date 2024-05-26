@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Analyzer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz@10..48&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300&display=swap" rel="stylesheet">
+</head>
+<style>
+    *{
+        padding: 0;
+        margin: 0;
+
+    }
+    body{
+        overflow-x: hidden;
+    }
+    nav{
+        height: 70px;
+        width: 100vw;
+        background-color: black;
+        font-family: 'Bricolage Grotesque', sans-serif;
+        cursor: pointer;
+        transition: height 0.3s ease;
+    }
+    .flex h1{
+        color: white;
+        
+    }
+    .flex .item{
+        color: white;
+        font-size: 25px;
+        padding: 5px;
+        
+    }
+    .flex{
+        display: flex;
+        justify-content: left;
+        gap: 20px;
+        position: absolute;
+        top: 2%;
+        transition: opacity 0.3s ease
+    }
+    .flex2{
+        display: flex;
+        justify-content: right;
+        gap: 20px;
+        position:relative;
+        right: 5%;
+        top: 10px;
+
+    }
+    .flex2 input{
+        padding: 14px;
+        border: 2px solid transparent;
+        border-radius: 10px;
+        font-family: 'Bricolage Grotesque', sans-serif;
+    }
+
+    .flex2 button{
+        width: 70px;
+        border: 2px solid transparent;
+         border-radius: 10px;
+         background-color: rgb(97, 169, 187);
+         color: white;
+         cursor: pointer;
+         font-family: 'Bricolage Grotesque', sans-serif;
+    }
+   textarea{
+    width: 50vw;
+    height: 200px;
+    font-size: 20px;
+    border-radius: 10px;
+   }
+
+   .bar{
+    width: 60px;
+    height: 5px;
+    background-color: white;
+    border-radius: 50px;
+    display: none;
+   }
+
+    .flex3{
+        display: flex;
+        justify-content: center;
+        
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 20px;
+    }
+    .flex3 h1{
+        font-family: 'Titillium Web', sans-serif;
+    }
+    .height{
+        height: 200px;
+        transition: height 0.3s ease;
+    }
+    .flex4{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        top: 20px;
+        gap: 20px;
+
+    }
+    .block {
+    display: flex !important; /* Adding !important to override previous display property */
+}
+.pre{
+    font-family: 'Titillium Web', sans-serif;
+}
+#word #preview{
+    font-family: 'Titillium Web', sans-serif;
+}
+
+
+    .flex4 button{
+        padding: 10px;
+        border: 2px solid transparent;
+        border-radius: 10px;
+        background-color: rgb(61, 122, 61);
+        color: white;
+        cursor: pointer;
+    }
+    .flex3 h1{
+        margin-top: 10px;
+    }
+    .flex3 p{
+        text-align: center;
+        font-size: 20px;
+    }
+    @media screen and (max-width:490px) {
+        nav {
+        height: 100px; /* Adjust the height for small screens */
+        }
+    .flex2 {
+        display: none;
+    }
+     .flex h1{
+        display: none;
+    }
+    .item{
+        display: none;
+        position: relative;
+        top: 100px;
+        justify-content: center;
+        align-items: center;
+        left:60px;
+       
+    }
+    textarea{
+        width: 90vw;
+      
+    }
+   
+    .scroll{
+        display: flex;
+        justify-content: left;
+        flex-direction: column;
+        gap: 10px;
+        position: absolute;
+        top: 20px;
+        left: 20px;
+    }
+    .bar {
+        display: block;
+    
+        position: relative;
+        bottom: 10px;
+        gap: 10px;
+         /* Test color */
+    }
+    #preview {
+        text-align: center;
+        font-size: 20px;
+        width: 100%; /* Set the width to 100% */
+        overflow: hidden; /* Remove the text overflow */
+        font-family: 'Titillium Web', sans-serif;
+    }
+}
+.pop-up.active {
+    display: block;
+    opacity: 1; /* Change opacity to 1 when the pop-up is active */
+    transition: opacity 0.5s ease; /* Add transition property for opacity */
+}
+.pop-up{
+   
+    height: 290px;
+    width: 50vw;
+    position: absolute;
+    transition: opacity 0.5s ease; 
+    opacity: 0;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    z-index: 10;
+    border-radius: 50px;
+    background: rgba( 255, 255, 255, 0.25 );
+box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+backdrop-filter: blur( 7px );
+-webkit-backdrop-filter: blur( 7px );
+border-radius: 10px;
+border: 1px solid rgba( 255, 255, 255, 0.18 );
+display: none;
+}
+.cross{
+    position: relative;
+    top: 9px;
+    cursor: pointer;
+     left: 715px;
+}
+.close{
+    width: 20px;
+    height: 5px;
+    background-color: rgb(134, 117, 117);
+    transform: rotate(45deg);
+    position: relative;
+    top: 5px;
+}
+.close1{
+    width: 20px;
+    height: 5px;
+    background-color: rgb(134, 117, 117);
+    transform: rotate(-45deg);
+
+}
+.flexing{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+    color: rgb(134, 117, 117);
+    font-family: 'Titillium Web', sans-serif;
+}
+ul{
+    font-size: 20px;
+}
+
+</style>
+<body>
+   
+    <div class="pop-up" id="pop">
+        <div class="cross">
+            <div class="close" ></div>
+            <div class="close1"></div>
+        </div>
+        <div class="flexing">
+            <h1>Welcome To Text Analyzer</h1>
+            <ul>
+                <li>Preview Text</li>
+                <li>Convert To Upper Case</li>
+                <li>Convert To Lower Case</li>
+                <li>Text To Speech</li>
+                <li>Display The Word Count</li>
+            </ul>
+            
+        </div>
+       
+    </div>
+
+    <div class="body">
+        <div class="flex3">
+            <h1>Enter Your Text Below</h1>
+        <textarea placeholder="Enter your Text Here" rows="8" id="text" ></textarea>
+        
+        <div class="flex4">
+            <button id="upper">Upper Case</button>
+            <button id="lower">Lower Case</button>
+            <button id="speech">Text To Speech</button>
+        </div>
+        <h1 class="pre">Preview</h1>
+        <p id="preview"></p>
+    </div>
+    <div class="flex3">
+        <h1>Word-Count</h1>
+        <p id="word"></p>
+    </div>
+   
+      
+        
+    </div>
+
+    <script>
+       let text = document.getElementById("text");
+       let upper=  document.getElementById("upper");
+       let lower = document.getElementById("lower");
+       let speak = document.getElementById("speech")
+       let speech  = new SpeechSynthesisUtterance()
+
+       upper.addEventListener("click", () => {
+    let textValue = text.value;
+    text.value = textValue.toUpperCase(); // Corrected method name to toUpperCase()
+    document.getElementById("preview").innerHTML = text.value.toUpperCase()
+})
+lower.addEventListener("click", () => {
+    let textValue = text.value;
+    text.value = textValue.toLowerCase(); // Corrected method name to toUpperCase()
+    document.getElementById("preview").innerHTML = text.value.toLowerCase()
+})
+
+text.addEventListener("input", () => {
+    let words = text.value.split(/\s+/).filter(word => word !== "").length;
+    document.getElementById("preview").innerHTML = text.value;
+    document.getElementById("word").innerHTML = `Word Count: ${words}`;
+});
+speak.addEventListener("click",()=>{
+    speech.text = `${text.value}`
+    speech.pitch = 2
+    speech.rate = 1
+    window.speechSynthesis.speak(speech)
+})
+
+document.getElementById("scr").addEventListener("click",()=>{
+    document.getElementById("item1").classList.toggle("block")
+    document.getElementById("item2").classList.toggle("block")
+    document.getElementById("item3").classList.toggle("block")
+    document.getElementById("nav").classList.toggle("height")
+})
+setTimeout(()=>{
+    document.getElementById("pop").classList.add("active")
+
+},2000)
+document.querySelector(".cross").addEventListener("click", () => {
+    document.getElementById("pop").classList.remove("active"); // Hide the pop-up
+});
+
+
+
+
+
+
+    </script>
+    
+</body>
+</html>
